@@ -80,7 +80,7 @@ class ViewController: UIViewController {
         
         let newGameButton = UIButton(type: .system)
         newGameButton.translatesAutoresizingMaskIntoConstraints = false
-        newGameButton.setTitle("START NEW GAME", for: .normal)
+        newGameButton.setTitle("NEW GAME", for: .normal)
         newGameButton.tintColor = UIColor.systemGreen
         newGameButton.titleLabel?.font = UIFont.systemFont(ofSize: 45)
         newGameButton.addTarget(self, action: #selector(loadLevel), for: .touchUpInside)
