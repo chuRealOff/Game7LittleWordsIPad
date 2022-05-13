@@ -158,7 +158,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        loadLevel()
+        performSelector(inBackground: #selector(loadLevel), with: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -250,22 +250,24 @@ class ViewController: UIViewController {
             }
         }
         
-        cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
-        answersLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
-
+       DispatchQueue.main.async {
+           self.cluesLabel.text = clueString.trimmingCharacters(in: .whitespacesAndNewlines)
+           self.answersLabel.text = solutionString.trimmingCharacters(in: .whitespacesAndNewlines)
+       }
+       
         letterBits.shuffle()
 
-        if letterBits.count == letterButtons.count {
-            for i in 0 ..< letterButtons.count {
-                letterButtons[i].setTitle(letterBits[i], for: .normal)
+       DispatchQueue.main.async {
+           if letterBits.count == self.letterButtons.count {
+               for i in 0 ..< self.letterButtons.count {
+                    self.letterButtons[i].setTitle(letterBits[i], for: .normal)
+                }
             }
+                for button in self.letterButtons {
+                    button.isHidden = false
+                }
         }
-       for button in letterButtons {
-           button.isHidden = false
-       }
-    }
-    
-    
-    
-}
+        
+   }
 
+}
